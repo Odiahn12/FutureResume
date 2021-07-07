@@ -1,34 +1,37 @@
-import React, { Component } from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 
-class Landing extends Component {
-  render() {
-    return (
+const Register = () => {
+  
+
+  return (
+    <Fragment>
       <div style={{ height: "100vh" }} className="container valign-wrapper">
         <div className="row ">
           <div className="col s12 center align">
             <div>
-              <h1 className="col s7center align">Future Resume</h1>
+              <h1 className="col s7center align">Choose Account Type:</h1>
             </div>
             <Link
-              to="/Register"
+              to="/RegisterUser"
               className="waves-effect waves-light btn-large"
               style={{ margin: "5px" }}
             >
-              Register
+              User
             </Link>
             <Link
-              to="/Login"
-              className="waves-effect waves-light btn-large blue"
+              to="/RegisterEmployer"
+              className="waves-effect waves-light btn-large"
               style={{ margin: "5px" }}
             >
-              Login
+              Employer
             </Link>
           </div>
         </div>
       </div>
+      </Fragment>
     );
   }
-}
 
-export default Landing;
+
+export default Register;

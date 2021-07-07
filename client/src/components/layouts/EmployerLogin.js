@@ -1,32 +1,48 @@
 import React, { Component } from "react";
+import axios from "axios";
 
-class Login extends Component {
+class EmployerLogin extends Component {
   constructor() {
     super();
     this.state = {
-      name: '',
-      email: '',
-      password: '',
-      password2: '',
+      email: "",
+      password: "",
       errors: {}
     };
   }
-    onSubmit(e) {
+onChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+onSubmit = e => {
     e.preventDefault();
-    alert('It works!')
+const userData = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    axios.post('/api/employer/login', userData)
+        .then(res => {
+          if (res.status !==200){
+            res.json()
+            .then(res => console.log(res))
+          } else {
+            console.log(res.data)
+          }
+        });
   };
   
-  render() {
-    return (
-      <div className="row ">
-        <h4 className="align center">Login</h4>
+    render() {
+        return (
+            <div className="row ">
+        <h4 className="align center">Employer Login</h4>
         <form onSubmit={this.onSubmit} className="col s4 offset-m4">
           <div className="row ">
             <div className="input-field ">
               <input
+                onChange={this.onChange}
+                value={this.state.email}
                 placeholder="Email"
                 id="email"
-                type="email"
+                type="text"
                 className="validate"
               />
               <span
@@ -35,6 +51,8 @@ class Login extends Component {
                 data-success="right"
               />
               <input
+                onChange={this.onChange}
+                value={this.state.password}
                 placeholder="Password"
                 id="password"
                 type="password"
@@ -61,8 +79,8 @@ class Login extends Component {
           </div>
         </form>
       </div>
-    );
-  }
+        )
+    }
 }
 
-export default Login;
+export default EmployerLogin;
